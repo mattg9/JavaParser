@@ -26,6 +26,15 @@ public class HTMLParser implements Parser {
         try {
             
             Document doc = Jsoup.parse(this.file, "UTF-8", "");
+            if (doc == null) {
+                System.err.println("HTML file is empty: " + this.file.getName());
+                return;
+            }
+
+            if (doc.getElementsByTag("table").isEmpty()) {
+                System.err.println("HTML file contains no table: " + this.file.getName());
+                return;
+            }
 
             // Parse HTML table headers
             parseHeaders(doc);
@@ -60,9 +69,19 @@ public class HTMLParser implements Parser {
     private Record processRecord(Element row) {
         Record record = new Record();
         Elements tds = row.select("td");
+        // throw any index out of bounds errors
         for (int i = 0; i < this.headers.size(); i++) {
-            record.setField(this.headers.get(i), tds.get(i).text());
+            String value = tds.get(i).text();
+            format(value);
+            record.setField(this.headers.get(i), value);
         }
         return record;
     }
+
+    private void format(String s) {
+        s.trim();
+        s.replaceAll("^\"|\"$", "");
+        s.replaceAll("\u00A0", "");
+    }
+
 }

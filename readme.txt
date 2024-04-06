@@ -75,4 +75,5 @@ Assumptions
 --------------------------
 - Only one table in a given HTML file
 - There is always an ID column (uppercase)
-- File format should always match extention
+- No duplicate headers in the same file
+- File content should always match extention

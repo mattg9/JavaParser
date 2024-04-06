@@ -4,16 +4,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import model.Record;
 import model.RecordTable;
 
 public class CSVParser implements Parser {
 
     private File file;
-    private List<String> headers;
+    private ArrayList<String> headers;
 
     public CSVParser(File file) {
         this.file = file;
@@ -30,7 +28,7 @@ public class CSVParser implements Parser {
                 parseHeaders(headerLine);
                 table.updateColumns(this.headers);
             } else {
-                System.out.println("CSV file is empty: " + this.file.getName());
+                System.err.println("CSV file is empty: " + this.file.getName());
                 return;
             }
 
@@ -53,15 +51,29 @@ public class CSVParser implements Parser {
     }
 
     private void parseHeaders(String headerLine) {
-        this.headers = Arrays.asList(headerLine.split(",\""));
+        String [] headers = headerLine.split(",\"");
+        for (String header : headers) {
+            format(header);
+            this.headers.add(header);
+        }
     }
 
     private Record processRecord(String recordLine) {
-        String[] fields = recordLine.split(",");
+        String[] data = recordLine.split(",");
         Record record = new Record();
+        // throw any index out of bounds errors
         for (int i = 0; i < this.headers.size(); i++) {
-            record.setField(this.headers.get(i), fields[i]);
+            String value = data[i];
+            format(value);
+            record.setField(this.headers.get(i), value);
         }
         return record;
     }
+
+    private void format(String s) {
+        s.trim();
+        s.replaceAll("^\"|\"$", "");
+        s.replaceAll("\u00A0", "");
+    }
+
 }

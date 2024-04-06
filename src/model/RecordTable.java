@@ -6,17 +6,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.HashSet;
 
 public class RecordTable {
     private ArrayList<Record> records;
-    private HashSet <String> columns;
+    private ArrayList <String> columns;
 
     public RecordTable() {
         this.records = new ArrayList<Record>();
-        this.columns = new HashSet <String>();
+        this.columns = new ArrayList <String>();
     }
 
     public boolean containsID(String Id) {
@@ -38,13 +36,9 @@ public class RecordTable {
     }
 
     public void updateColumns(ArrayList<String> columns) {
-        this.columns.addAll(columns);
-        updateTable();
-    }
-
-    public void updateColumns(List<String> columns) {
-        this.columns.addAll(columns);
-        updateTable();
+        columns.stream()
+                .filter(c -> !this.columns.contains(c))
+                .forEach(this.columns::add);
     }
 
     public void addRecord(Record record) {
@@ -55,19 +49,26 @@ public class RecordTable {
         return this.records;
     }
 
-    public void sort() {
+    public void sort(String Id) {
+        // sort my headers
+        if (this.columns.contains(Id)) {
+            this.columns.remove(Id);
+        }
+        this.columns.add(0, Id);
+        // sort my records
         Collections.sort(this.records, 
-            Comparator.comparing(r -> r.getField("ID")));
+            Comparator.comparing(r -> r.getField(Id)));
     }
 
     public void print() {
-        sort();
+        sort("ID");
         for (Record record : this.records) {
             record.print();
         }
     }
 
     public void exportToCSV(String filename){
+        sort("ID");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             if (! this.records.isEmpty()) {
                 // Write headers
@@ -87,15 +88,6 @@ public class RecordTable {
         }
     }
 
-    private void updateTable() {
-        for (Record record : this.records) {
-            for (String column : this.columns) {
-                if (record.getField(column) == null) {
-                    record.setField(column, "N/A");
-                }
-            }
-        }
-    }
 }
 
 class RecordNotFoundException extends RuntimeException {
