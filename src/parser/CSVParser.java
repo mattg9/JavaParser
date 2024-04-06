@@ -73,11 +73,9 @@ public class CSVParser implements Parser {
         return record;
     }
 
-    // handle wrapped quotes
     private String format(String s) {
-        s = s.trim();
-        s = s.replaceAll("^\"|\"$", "");
-        return s;
+        return s.trim()
+            .replaceAll("^\"|\"$", "");
     }
 
 }

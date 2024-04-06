@@ -81,12 +81,9 @@ public class HTMLParser implements Parser {
         return record;
     }
 
-    // handle html encodings
     private String format(String s) {
-        s = s.trim();
-        s = s.replaceAll("^\"|\"$", "");
-        s = s.replaceAll("\u00A0", "");
-        return s;
+        return s.trim()
+            .replaceAll("^\"|\"$", "");
     }
 
 }

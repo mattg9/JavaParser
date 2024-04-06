@@ -67,27 +67,28 @@ My Notes
 --------------------------
 Process
 --------------------------
-- Keep a record of everything I find
+- Loop over files and pick which parser to use
+- Keep a record of everything I find reading (utf8)
 - Update a table with new records
 - Update existing records in the table given ID
 - Sort on ID
-- Export the table to a csv file
+- Export the table to a csv file (utf8)
 
 --------------------------
 Test Cases
 --------------------------
 - Empty values in file table (csv, html)
 - Only headers provided in a file
-  - This adds new headers to the table, when combined the records just yeild null values for those fields.
+  - Adds new headers to the table, when combined the records just yeild null values for those fields.
 - Badly formatted files (assume file has been validated?)
-  - May throw exception 'index out of bounds' if file header count exceeds row data provided.
-- Languages: I will test french, germany, japanese, and russian.
+  - Catch thrown exception 'index out of bounds' if file header count exceeds row data provided.
+- Languages: french, germany, japanese, russian
 - Column header is an emtpy tag or empty string?
 
 --------------------------
 Assumptions
 --------------------------
-- The data in HTML file is always in a table with id 'directory'
+- If there is data in the HTML file it can only be found in a table with id 'directory'
 
 - There is always an ID column
 
@@ -96,9 +97,9 @@ Assumptions
 - No duplicate headers in files
   - I'm not merging a Name value from file 1 with Name value from file 2
   - Current implementation would override Name with value in file 2
-  - Would likely represent data in this case with 'First Name' and 'Last Name'
+  - You'd probably want to represent data in this case with 'First Name' and 'Last Name'
 
 - I'm not anticpating case sensitive headers (i.e. Name, name)
-  - but could always send headers toUpperCase() to avoid possible conflicts
+  - However, I will send headers toUpperCase() to avoid possible conflicts
 
-- File content should always match extention (e.g. only XML in a ".csv")
+- File content should match extention (e.g. a csv named .html by mistake)
