@@ -10,6 +10,10 @@ import java.io.FileNotFoundException;
 import model.Record;
 import model.RecordTable;
 
+/**
+ * This class is for reading directory table from HTML files
+ * and adding it to a Record Table object
+ */
 public class HTMLParser implements Parser {
 
     private File file;

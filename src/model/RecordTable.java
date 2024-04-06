@@ -9,15 +9,30 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * This class represents a record table
+ * Holds a list of the records in the table
+ * Keeps track of the list of columns in the table
+ * 
+ */
 public class RecordTable {
     private ArrayList<Record> records;
     private ArrayList <String> columns;
 
+    
+    /**
+     * Constructs a Record table with an empty list of records and columns.
+     */
     public RecordTable() {
         this.records = new ArrayList<Record>();
         this.columns = new ArrayList <String>();
     }
 
+    /**
+     * Determine whether a record already exists with the given ID
+     * @param Id - Id to search for in the table
+     * @return true if record found, false if no record is found
+     */
     public boolean containsID(String Id) {
         return this.records.stream()
             .filter(r -> r != null && 
@@ -27,6 +42,12 @@ public class RecordTable {
             .isPresent();
     }
 
+    /**
+     * Return a record with matching Id in the table
+     * @param Id - Id to search for in the table
+     * @throws Exception no record found
+     * @return a Record that matched the Id filter
+     */
     public Record getRecord(String Id) throws RecordNotFoundException {
         return this.records.stream()
             .filter(r -> r != null && 
@@ -36,6 +57,11 @@ public class RecordTable {
             .orElseThrow(() -> new RecordNotFoundException("Record with ID " + Id + " not found."));
     }
 
+    /**
+     * Return a record with matching Id in the table
+     * @param Id - Id to search for in the table
+     * @return a Record that matched the Id filter, exception thrown otherwise
+     */
     public void updateColumns(ArrayList<String> columns) {
         columns.stream()
                 .filter(c -> !this.columns.contains(c))

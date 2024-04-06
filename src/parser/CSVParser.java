@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import model.Record;
 import model.RecordTable;
 
+/**
+ * This class is for reading directory table from CSV files
+ * and adding it to a Record Table object
+ */
 public class CSVParser implements Parser {
 
     private File file;
