@@ -2,7 +2,9 @@ package parser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.text.Normalizer;
@@ -21,10 +23,10 @@ public class CSVParser implements Parser {
 
     @Override
     public void parse(RecordTable table) {
-    
-        try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+            new FileInputStream(this.file), "UTF-8"))) {
             // Read the first line to get headers
-            String headerLine = br.readLine();
+            String headerLine = reader.readLine();
             if (headerLine != null) {
                 parseHeaders(headerLine);
                 table.updateColumns(this.headers);
@@ -35,7 +37,7 @@ public class CSVParser implements Parser {
 
             // Process the rest of the lines as records
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 Record r = processRecord(line);
                 if (table.containsID(r.getField("ID"))) {
                     Record old = table.getRecord(r.getField("ID"));
