@@ -72,16 +72,16 @@ public class HTMLParser implements Parser {
         // throw any index out of bounds errors
         for (int i = 0; i < this.headers.size(); i++) {
             String value = tds.get(i).text();
-            format(value);
-            record.setField(this.headers.get(i), value);
+            record.setField(this.headers.get(i), format(value));
         }
         return record;
     }
 
-    private void format(String s) {
-        s.trim();
-        s.replaceAll("^\"|\"$", "");
-        s.replaceAll("\u00A0", "");
+    private String format(String s) {
+        s = s.trim();
+        s = s.replaceAll("^\"|\"$", "");
+        s = s.replaceAll("\u00A0", "");
+        return s;
     }
 
 }

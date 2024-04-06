@@ -51,10 +51,9 @@ public class CSVParser implements Parser {
     }
 
     private void parseHeaders(String headerLine) {
-        String [] headers = headerLine.split(",\"");
-        for (String header : headers) {
-            format(header);
-            this.headers.add(header);
+        String [] headerArr = headerLine.split(",");
+        for (String header : headerArr) {
+            this.headers.add(format(header));
         }
     }
 
@@ -64,16 +63,16 @@ public class CSVParser implements Parser {
         // throw any index out of bounds errors
         for (int i = 0; i < this.headers.size(); i++) {
             String value = data[i];
-            format(value);
-            record.setField(this.headers.get(i), value);
+            record.setField(this.headers.get(i), format(value));
         }
         return record;
     }
 
-    private void format(String s) {
-        s.trim();
-        s.replaceAll("^\"|\"$", "");
-        s.replaceAll("\u00A0", "");
+    private String format(String s) {
+        s = s.trim();
+        s = s.replaceAll("^\"|\"$", "");
+        s = s.replaceAll("\u00A0", "");
+        return s;
     }
 
 }
