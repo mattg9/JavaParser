@@ -72,7 +72,6 @@ public class CSVParser implements Parser {
     private String format(String s) {
         s = s.trim();
         s = s.replaceAll("^\"|\"$", "");
-        s = s.replaceAll("\u00A0", "");
         return s;
     }
 

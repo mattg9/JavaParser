@@ -59,16 +59,28 @@ My Notes
 - I will need an interface that handles the two file types so that I can overload a parsing method.
   - This ensures we can scale it to more file types
 - Test with different languages -> ensure utf8 characters are handled properly
-- I should keep a record of everything I find, and then at the end I'll need to write that record table to a csv file
-- The values in csv are wrapped in quotes
-  - I could trim any whitespace, then ensure I remove quotes wrapping the text found
+- Values need to be formatted:
+  - CSV -> wrapped in quotes
+  - HTML -> character encondings (&nbsp;)
+  - Ensure we trim whitespace, replace wrapped quotes, replace some encodings
+
+--------------------------
+Process
+--------------------------
+- Keep a record of everything I find
+- Update a table with new records
+- Update existing records in the table given ID
+- Sort on ID
+- Export the table to a csv file
+- Cleanup all the objects I created?
 
 --------------------------
 Test Cases
 --------------------------
 - Empty values in the table
-- Too many headers
-- Too few headers
+- Badly formatted files (assume file has been validated?)
+  - may throw exception 'index out of bounds' if file header count exceeds row data provided.
+- Languages: I will test french, germany, japanese, and russian.
 
 --------------------------
 Assumptions
