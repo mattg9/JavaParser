@@ -77,9 +77,11 @@ Process
 --------------------------
 Test Cases
 --------------------------
-- Empty values in the table
+- Empty values in file table (csv, html)
+- Only headers provided in a file
+  - This adds new headers to the table, when combined the records just yeild null values for those fields.
 - Badly formatted files (assume file has been validated?)
-  - may throw exception 'index out of bounds' if file header count exceeds row data provided.
+  - May throw exception 'index out of bounds' if file header count exceeds row data provided.
 - Languages: I will test french, germany, japanese, and russian.
 
 --------------------------
