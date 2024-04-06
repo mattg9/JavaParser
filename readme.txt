@@ -82,6 +82,7 @@ Test Cases
 - Badly formatted files (assume file has been validated?)
   - May throw exception 'index out of bounds' if file header count exceeds row data provided.
 - Languages: I will test french, germany, japanese, and russian.
+- Column header is an emtpy tag or empty string?
 
 --------------------------
 Assumptions
