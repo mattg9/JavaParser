@@ -73,7 +73,9 @@ Test Cases
 --------------------------
 Assumptions
 --------------------------
-- Only one table in a given HTML file
+- The table with data is always in id=directory for HTML files
 - There is always an ID column (uppercase)
 - No duplicate headers in the same file
+- I'm not anticpating case sensitive headers (i.e. Name, name)
+  - Could always toUpper() the headers to avoid these conflicts
 - File content should always match extention
