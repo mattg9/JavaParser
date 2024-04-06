@@ -11,8 +11,12 @@ public class Record {
     }
 
     public void setField(String fieldName, String value) {
-        String formatField = fieldName.trim().replaceAll("^\"|\"$", "");
-        String formatValue = value.trim().replaceAll("^\"|\"$", "");
+        String formatField = fieldName.trim()
+            .replaceAll("^\"|\"$", "")
+            .replace("&nbsp;", " ");
+        String formatValue = value.trim()
+            .replaceAll("^\"|\"$", "")
+            .replace("&nbsp;", " ");
         this.fields.put(formatField, formatValue);
     }
 
