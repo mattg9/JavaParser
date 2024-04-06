@@ -73,9 +73,18 @@ Test Cases
 --------------------------
 Assumptions
 --------------------------
-- The table with data is always in id=directory for HTML files
-- There is always an ID column (uppercase)
-- No duplicate headers in the same file
+- The data in HTML file is always in a table with id 'directory'
+
+- There is always an ID column
+
+- The column headers across all files are in the same language.
+
+- No duplicate headers in files
+  - I'm not merging a Name value from file 1 with Name value from file 2
+  - Current implementation would override Name with value in file 2
+  - Would likely represent data in this case with 'First Name' and 'Last Name'
+
 - I'm not anticpating case sensitive headers (i.e. Name, name)
   - but could always send headers toUpperCase() to avoid possible conflicts
+
 - File content should always match extention (e.g. only XML in a ".csv")
