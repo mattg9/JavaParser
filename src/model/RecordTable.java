@@ -69,29 +69,30 @@ public class RecordTable {
     }
 
     public void exportToCSV(String filename){
+        // Check first before modifying an existing file
+        if (this.records.isEmpty()) {
+            System.err.println("No records found to export");
+            return;
+        }
+
         sort("ID");
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(filename), "UTF-8"))) {
-            if (! this.records.isEmpty()) {
-                // Write headers
-                writer.write(this.columns.stream().collect(Collectors.joining(",")));
+            new FileOutputStream(filename), "UTF-8"))) {
+            // Write headers
+            writer.write(this.columns.stream().collect(Collectors.joining(",")));
+            writer.newLine();
+            // Write records
+            for (Record record : this.records) {
+                writer.write(this.columns.stream()
+                    .map(c -> record.getField(c))
+                    .collect(Collectors.joining(",")));
                 writer.newLine();
-                // Write records
-                for (Record record : this.records) {
-                    writer.write(this.columns.stream()
-                        .map(c -> record.getField(c))
-                        .collect(Collectors.joining(",")));
-                    writer.newLine();
-                }
-                System.out.println("Records have been written to " + filename);
-            } else { 
-                System.err.println("No records found to export");
             }
+            System.out.println("Records have been written to " + filename);
         } catch (IOException e) {
             System.err.println("Error writing records to CSV: " + e.getMessage());
         }
     }
-
 }
 
 class RecordNotFoundException extends RuntimeException {
