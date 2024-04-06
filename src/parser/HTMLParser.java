@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.Normalizer;
 import model.Record;
 import model.RecordTable;
 
