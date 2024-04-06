@@ -23,7 +23,7 @@ public class CSVParser implements Parser {
     public void parse(RecordTable table) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
             new FileInputStream(this.file), "UTF-8"))) {
-            // Read the first line to get headers
+            // Read the first line to get the table headers
             String headerLine = reader.readLine();
             if (headerLine != null) {
                 parseHeaders(headerLine);
@@ -33,7 +33,7 @@ public class CSVParser implements Parser {
                 return;
             }
 
-            // Process the rest of the lines as records
+            // Process the rest of the lines as records, updating any existing IDs
             String line;
             while ((line = reader.readLine()) != null) {
                 Record r = processRecord(line);

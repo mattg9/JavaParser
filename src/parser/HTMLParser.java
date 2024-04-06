@@ -40,7 +40,7 @@ public class HTMLParser implements Parser {
             parseHeaders(directory);
             table.updateColumns(this.headers);
 
-            // Grab all the table rows after the column names
+            // Grab all the table rows below the table headers
             Elements rows = directory.select("tr:gt(0)");
             // Process each record, updating any existing IDs
             for (Element row : rows) {

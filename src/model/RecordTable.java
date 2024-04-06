@@ -51,7 +51,7 @@ public class RecordTable {
     }
 
     public void sort(String Id) {
-        // sort my headers
+        // sort my columns
         if (this.columns.contains(Id)) {
             this.columns.remove(Id);
         }
@@ -78,7 +78,7 @@ public class RecordTable {
         sort("ID");
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
             new FileOutputStream(filename), "UTF-8"))) {
-            // Write headers
+            // Write columns
             writer.write(this.columns.stream().collect(Collectors.joining(",")));
             writer.newLine();
             // Write records

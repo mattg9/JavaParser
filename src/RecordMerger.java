@@ -37,12 +37,11 @@ public class RecordMerger {
                     break;
                 default:
                     System.out.println("Unsupported file type: " + filename);
-                    continue; // Skip to the next iteration
+                    continue; // Skip to the next file
             }
             parser.parse(rt);
 		}
         
-        // rt.print();
         rt.exportToCSV(FILENAME_COMBINED);
 	}
 }
