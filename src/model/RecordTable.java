@@ -1,7 +1,8 @@
 package model;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -69,7 +70,8 @@ public class RecordTable {
 
     public void exportToCSV(String filename){
         sort("ID");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(filename), "UTF-8"))) {
             if (! this.records.isEmpty()) {
                 // Write headers
                 writer.write(this.columns.stream().collect(Collectors.joining(",")));
