@@ -60,10 +60,14 @@ public class CSVParser implements Parser {
     private Record processRecord(String recordLine) {
         String[] data = recordLine.split(",");
         Record record = new Record();
-        // throw any index out of bounds errors
-        for (int i = 0; i < this.headers.size(); i++) {
-            String value = data[i];
-            record.setField(this.headers.get(i), format(value));
+        try {
+            for (int i = 0; i < this.headers.size(); i++) {
+                String value = data[i];
+                record.setField(this.headers.get(i), format(value));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Error reading record: " + e.getMessage() + ".");
+            System.err.println("Field for this record will be assigned a value of null");
         }
         return record;
     }

@@ -70,10 +70,14 @@ public class HTMLParser implements Parser {
     private Record processRecord(Element row) {
         Record record = new Record();
         Elements tds = row.select("td");
-        // throw any index out of bounds errors
-        for (int i = 0; i < this.headers.size(); i++) {
-            String value = tds.get(i).text();
-            record.setField(this.headers.get(i), format(value));
+        try {
+            for (int i = 0; i < this.headers.size(); i++) {
+                String value = tds.get(i).text();
+                record.setField(this.headers.get(i), format(value));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Error reading record: " + e.getMessage() + ".");
+            System.err.println("Field for this record will be assigned a value of null");
         }
         return record;
     }

@@ -72,7 +72,6 @@ Process
 - Update existing records in the table given ID
 - Sort on ID
 - Export the table to a csv file
-- Cleanup all the objects I created?
 
 --------------------------
 Test Cases
