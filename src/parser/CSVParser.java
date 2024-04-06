@@ -73,7 +73,7 @@ public class CSVParser implements Parser {
         return record;
     }
 
-    private String format(String s) {
+    private static String format(String s) {
         return s.trim()
             .replaceAll("^\"|\"$", "");
     }
