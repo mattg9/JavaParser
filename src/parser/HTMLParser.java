@@ -31,17 +31,18 @@ public class HTMLParser implements Parser {
                 return;
             }
 
-            if (doc.getElementsByTag("table").isEmpty()) {
-                System.err.println("HTML file contains no table: " + this.file.getName());
+            Element directory = doc.getElementById("directory");
+            if (directory == null) {
+                System.err.println("HTML file contains no directory: " + this.file.getName());
                 return;
             }
 
             // Parse HTML table headers
-            parseHeaders(doc);
+            parseHeaders(directory);
             table.updateColumns(this.headers);
 
             // Grab all the table rows after the column names
-            Elements rows = doc.select("tr:gt(0)");
+            Elements rows = directory.select("tr:gt(0)");
             // Process each record, updating any existing IDs
             for (Element row : rows) {
                 Record r = processRecord(row);
@@ -59,8 +60,8 @@ public class HTMLParser implements Parser {
         }
     }
 
-    private void parseHeaders(Document doc) {
-        Elements elements = doc.select("th");
+    private void parseHeaders(Element directory) {
+        Elements elements = directory.select("th");
         for (Element th : elements) {
             this.headers.add(th.text().toUpperCase());
         }

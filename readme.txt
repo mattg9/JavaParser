@@ -77,5 +77,5 @@ Assumptions
 - There is always an ID column (uppercase)
 - No duplicate headers in the same file
 - I'm not anticpating case sensitive headers (i.e. Name, name)
-  - Could always toUpper() the headers to avoid these conflicts
-- File content should always match extention
+  - but could always send headers toUpperCase() to avoid possible conflicts
+- File content should always match extention (e.g. only XML in a ".csv")
