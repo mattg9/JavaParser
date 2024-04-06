@@ -17,14 +17,18 @@ public class RecordTable {
 
     public boolean containsID(String Id) {
         return this.records.stream()
-            .filter(r -> r != null && r.getField("ID") != null && Objects.equals(r.getField("ID"), Id))
+            .filter(r -> r != null && 
+                r.getField("ID") != null && 
+                Objects.equals(r.getField("ID"), Id))
             .findFirst()
             .isPresent();
     }
 
     public Record getRecord(String Id) throws RecordNotFoundException {
         return this.records.stream()
-            .filter(r -> r != null && r.getField("ID") != null && Objects.equals(r.getField("ID"), Id))
+            .filter(r -> r != null && 
+                r.getField("ID") != null && 
+                Objects.equals(r.getField("ID"), Id))
             .findFirst()
             .orElseThrow(() -> new RecordNotFoundException("Record with ID " + Id + " not found."));
     }
@@ -38,7 +42,8 @@ public class RecordTable {
     }
 
     public void sort() {
-        Collections.sort(this.records, Comparator.comparing(r -> r.getField("ID")));
+        Collections.sort(this.records, 
+            Comparator.comparing(r -> r.getField("ID")));
     }
 
     public void print() {
@@ -51,7 +56,7 @@ public class RecordTable {
     public void exportToCSV(String filename){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             if (! this.records.isEmpty()) {
-                // I will need to grab a record with the most keys
+                // Write headers
                 Record firstRecord = this.records.get(0);
                 writer.write(firstRecord.getKeys().stream().collect(Collectors.joining(",")));
                 writer.newLine();
@@ -61,8 +66,8 @@ public class RecordTable {
                     writer.newLine();
                 }
                 System.out.println("Records have been written to " + filename);
-            } else {
-                System.out.println("No record found to export");
+            } else { 
+                System.err.println("No record found to export");
             }
         } catch (IOException e) {
             System.err.println("Error writing records to CSV: " + e.getMessage());
