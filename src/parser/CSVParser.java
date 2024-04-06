@@ -53,7 +53,7 @@ public class CSVParser implements Parser {
     private void parseHeaders(String headerLine) {
         String [] headerArr = headerLine.split(",");
         for (String header : headerArr) {
-            this.headers.add(format(header));
+            this.headers.add(format(header).toUpperCase());
         }
     }
 

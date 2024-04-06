@@ -62,7 +62,7 @@ public class HTMLParser implements Parser {
     private void parseHeaders(Document doc) {
         Elements elements = doc.select("th");
         for (Element th : elements) {
-            this.headers.add(th.text());
+            this.headers.add(th.text().toUpperCase());
         }
     }
 
