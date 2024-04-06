@@ -75,13 +75,15 @@ public class RecordTable {
                 writer.write(this.columns.stream().collect(Collectors.joining(",")));
                 writer.newLine();
                 // Write records
-                for (Record record : records) {
-                    writer.write(record.getValues().stream().collect(Collectors.joining(",")));
+                for (Record record : this.records) {
+                    writer.write(this.columns.stream()
+                        .map(c -> record.getField(c))
+                        .collect(Collectors.joining(",")));
                     writer.newLine();
                 }
                 System.out.println("Records have been written to " + filename);
             } else { 
-                System.err.println("No record found to export");
+                System.err.println("No records found to export");
             }
         } catch (IOException e) {
             System.err.println("Error writing records to CSV: " + e.getMessage());
