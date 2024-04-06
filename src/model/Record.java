@@ -13,10 +13,10 @@ public class Record {
     public void setField(String fieldName, String value) {
         String formatField = fieldName.trim()
             .replaceAll("^\"|\"$", "")
-            .replace("&nbsp;", " ");
+            .replaceAll("\u00A0", "");
         String formatValue = value.trim()
             .replaceAll("^\"|\"$", "")
-            .replace("&nbsp;", " ");
+            .replaceAll("\u00A0", "");
         this.fields.put(formatField, formatValue);
     }
 
