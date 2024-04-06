@@ -42,6 +42,7 @@ public class RecordMerger {
             parser.parse(rt);
 		}
         
+        rt.print();
         rt.exportToCSV(FILENAME_COMBINED);
 	}
 }

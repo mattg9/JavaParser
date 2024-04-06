@@ -4,7 +4,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.ArrayList;
-import java.util.List;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +14,7 @@ import model.RecordTable;
 public class HTMLParser implements Parser {
 
     private File file;
-    private List<String> headers;
+    private ArrayList<String> headers;
 
     public HTMLParser(File file) {
         this.file = file;
@@ -30,6 +29,7 @@ public class HTMLParser implements Parser {
 
             // Parse HTML table headers
             parseHeaders(doc);
+            table.updateColumns(this.headers);
 
             // Grab all the table rows after the column names
             Elements rows = doc.select("tr:gt(0)");
@@ -53,7 +53,7 @@ public class HTMLParser implements Parser {
     private void parseHeaders(Document doc) {
         Elements elements = doc.select("th");
         for (Element th : elements) {
-            this.headers.add(th.text());        
+            this.headers.add(th.text());
         }
     }
 

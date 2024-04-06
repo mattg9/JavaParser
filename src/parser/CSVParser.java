@@ -28,6 +28,7 @@ public class CSVParser implements Parser {
             String headerLine = br.readLine();
             if (headerLine != null) {
                 parseHeaders(headerLine);
+                table.updateColumns(this.headers);
             } else {
                 System.out.println("CSV file is empty: " + this.file.getName());
                 return;
@@ -52,7 +53,7 @@ public class CSVParser implements Parser {
     }
 
     private void parseHeaders(String headerLine) {
-        this.headers = Arrays.asList(headerLine.split(","));
+        this.headers = Arrays.asList(headerLine.split(",\""));
     }
 
     private Record processRecord(String recordLine) {
