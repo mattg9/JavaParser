@@ -3,7 +3,7 @@ cd "%~dp0"
 rd /S /Q build
 md build
 
-javac -source 11 -target 11 -sourcepath src -cp ".;lib\*" -d build src\RecordMerger.java
+javac -source 1.8 -target 1.8 -sourcepath src -cp ".;lib\*" -d build src\RecordMerger.java
 
 del /q cantest.jar
 jar cvf cantest.jar -C build\ .
