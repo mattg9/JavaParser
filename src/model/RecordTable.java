@@ -10,18 +10,16 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * This class represents a record table
- * Holds a list of the records in the table
- * Keeps track of the list of columns in the table
+ * This class represents a table of records
+ * It maintains a list of records and keeps track of a list of columns in the table
  * 
  */
 public class RecordTable {
     private ArrayList<Record> records;
     private ArrayList <String> columns;
 
-    
     /**
-     * Constructs a Record table with an empty list of records and columns.
+     * Constructs a new RecordTable with an empty list of records and columns.
      */
     public RecordTable() {
         this.records = new ArrayList<Record>();
@@ -30,8 +28,9 @@ public class RecordTable {
 
     /**
      * Determine whether a record already exists with the given ID
-     * @param Id - Id to search for in the table
-     * @return true if record found, false if no record is found
+     * 
+     * @param Id the unique identifier to search for in the table
+     * @return true if a record is found matching criteria, false otherwise
      */
     public boolean containsID(String Id) {
         return this.records.stream()
@@ -43,10 +42,11 @@ public class RecordTable {
     }
 
     /**
-     * Return a record with matching Id in the table
-     * @param Id - Id to search for in the table
-     * @throws Exception no record found
-     * @return a Record that matched the Id filter
+     * Retrieves a record with matching Id in the table
+     * 
+     * @param Id the Id of the record to retrieve
+     * @return the Record object with specified Id
+     * @throws RecordNotFoundException if the record with the specified ID is not found
      */
     public Record getRecord(String Id) throws RecordNotFoundException {
         return this.records.stream()
@@ -68,15 +68,31 @@ public class RecordTable {
                 .forEach(this.columns::add);
     }
 
+    /**
+     * Adds a record to our table.
+     * 
+     * @param record the Record object to be added
+     */
     public void addRecord(Record record) {
         this.records.add(record);
     }
 
+    /**
+     * Retrieves all records in the table
+     * 
+     * @return the ArrayList containing records
+     */
     public ArrayList<Record> getRecords() {
         return this.records;
     }
 
-    public void sort(String Id) {
+    /**
+     * Sorts the records based on the specified field name.
+     * Arranges columns so this field name is at beginning of column list.
+     * 
+     * @param Id name of the field based on which records are to be sorted (e.g. ID)
+     */
+    private void sort(String Id) {
         // sort my columns
         if (this.columns.contains(Id)) {
             this.columns.remove(Id);
@@ -87,6 +103,9 @@ public class RecordTable {
             Comparator.comparing(r -> r.getField(Id)));
     }
 
+    /**
+     * Sorts the records by ID, then prints each record.
+     */
     public void print() {
         sort("ID");
         for (Record record : this.records) {
@@ -94,6 +113,11 @@ public class RecordTable {
         }
     }
 
+    /**
+     * Sorts the records by ID, then exports them to specified file.
+     * 
+     * @param filename name of the file to write the records to.
+     */
     public void exportToCSV(String filename){
         // Check first before modifying an existing file
         if (this.records.isEmpty()) {
@@ -121,7 +145,15 @@ public class RecordTable {
     }
 }
 
+/**
+ * Exception thrown when a record is not found.
+ */
 class RecordNotFoundException extends RuntimeException {
+    /**
+     * Constructs a new RecordNotFoundException with the specified message.
+     * 
+     * @param message the exception text to display
+     */
     public RecordNotFoundException(String message) {
         super(message);
     }
