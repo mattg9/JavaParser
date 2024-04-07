@@ -10,8 +10,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * This class represents a table of records
- * It maintains a list of records and keeps track of a list of columns in the table
+ * This class represents a table of records.
+ * It maintains a list of records and keeps track of a list of columns in the table.
  * 
  */
 public class RecordTable {
@@ -27,7 +27,7 @@ public class RecordTable {
     }
 
     /**
-     * Determine whether a record already exists with the given ID
+     * Determine whether a record already exists with the given ID.
      * 
      * @param Id the unique identifier to search for in the table
      * @return true if a record is found matching criteria, false otherwise
@@ -42,7 +42,7 @@ public class RecordTable {
     }
 
     /**
-     * Retrieves a record with matching Id in the table
+     * Retrieves a record with matching Id in the table.
      * 
      * @param Id the Id of the record to retrieve
      * @return the Record object with specified Id
@@ -58,7 +58,8 @@ public class RecordTable {
     }
 
     /**
-     * Return a record with matching Id in the table
+     * Return a record with matching Id in the table.
+     * 
      * @param Id - Id to search for in the table
      * @return a Record that matched the Id filter, exception thrown otherwise
      */
@@ -78,9 +79,9 @@ public class RecordTable {
     }
 
     /**
-     * Retrieves all records in the table
+     * Retrieves all records in the table.
      * 
-     * @return the ArrayList containing records
+     * @return the ArrayList containing all records
      */
     public ArrayList<Record> getRecords() {
         return this.records;
