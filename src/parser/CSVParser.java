@@ -55,6 +55,12 @@ public class CSVParser implements Parser {
         }
     }
 
+    /**
+     * Parses header values from the first comma-separated line.
+     * Modifies all text found to uppercase.
+     * 
+     * @param headerLine the comma-separated string representing the headers
+     */
     private void parseHeaders(String headerLine) {
         String [] headerArr = headerLine.split(",");
         for (String header : headerArr) {
@@ -62,6 +68,12 @@ public class CSVParser implements Parser {
         }
     }
 
+    /**
+     * Processes a single record represented comma-separated line.
+     * 
+     * @param recordLine the comma-separated string representing the record
+     * @return the processed Record object
+     */
     private Record processRecord(String recordLine) {
         String[] data = recordLine.split(",");
         Record record = new Record();
@@ -77,6 +89,13 @@ public class CSVParser implements Parser {
         return record;
     }
 
+    /**
+     * Formats a string by removing leading and trailing whitespace and optional wrapped double quotes.
+     * Can be customized further for handling unique table values found in a CSV file.
+     * 
+     * @param s the string to be formatted
+     * @return the formatted string
+     */
     private static String format(String s) {
         return s.trim()
             .replaceAll("^\"|\"$", "");

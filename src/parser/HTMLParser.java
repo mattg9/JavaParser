@@ -63,6 +63,12 @@ public class HTMLParser implements Parser {
         }
     }
 
+    /**
+     * Parses header elements from an HTML directory table and adds them to our list of headers.
+     * Modifies all text found in 'th' elements to uppercase.
+     * 
+     * @param directory the HTML table containing th elements
+     */
     private void parseHeaders(Element directory) {
         Elements elements = directory.select("th");
         for (Element th : elements) {
@@ -70,6 +76,12 @@ public class HTMLParser implements Parser {
         }
     }
 
+    /**
+     * Processes a single record represented by an HTML table row element.
+     * 
+     * @param row the HTML table row element representing the record
+     * @return the processed Record object
+     */
     private Record processRecord(Element row) {
         Record record = new Record();
         Elements tds = row.select("td");
@@ -85,6 +97,13 @@ public class HTMLParser implements Parser {
         return record;
     }
 
+    /**
+     * Formats a string by removing leading and trailing whitespace and optional wrapped double quotes.
+     * Can be customized further for handling unique table values found in an HTML file.
+     * 
+     * @param s the string to be formatted
+     * @return the formatted string
+     */
     private static String format(String s) {
         return s.trim()
             .replaceAll("^\"|\"$", "");
