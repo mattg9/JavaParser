@@ -19,6 +19,12 @@ public class HTMLParser implements Parser {
     private File file;
     private ArrayList<String> headers;
 
+    /**
+     * Constructs a HTMLParser object with the specified file.
+     * Initializes the file and creates an empty list for headers.
+     * 
+     * @param file the HTML file to parse
+     */
     public HTMLParser(File file) {
         this.file = file;
         this.headers = new ArrayList<>();

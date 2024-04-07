@@ -18,6 +18,12 @@ public class CSVParser implements Parser {
     private File file;
     private ArrayList<String> headers;
 
+    /**
+     * Constructs a CSVParser object with the specified file.
+     * Initializes the file and creates an empty list for headers.
+     * 
+     * @param file the CSV file to parse
+     */
     public CSVParser(File file) {
         this.file = file;
         this.headers = new ArrayList<>();
