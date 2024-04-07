@@ -11,8 +11,7 @@ import model.Record;
 import model.RecordTable;
 
 /**
- * This class is for reading directory table from HTML files
- * and adding it to a Record Table object
+ * This class is for parsing directory table values from HTML files and adding them to a Record Table object.
  */
 public class HTMLParser implements Parser {
 
@@ -30,6 +29,11 @@ public class HTMLParser implements Parser {
         this.headers = new ArrayList<>();
     }
 
+    /**
+     * Parses the HTML file and populates the provided RecordTable with records.
+     * 
+     * @param table the RecordTable object to populate with parsed records
+     */
     @Override
     public void parse(RecordTable table) {
         try {

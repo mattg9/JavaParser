@@ -10,8 +10,7 @@ import model.Record;
 import model.RecordTable;
 
 /**
- * This class is for reading directory table from CSV files
- * and adding it to a Record Table object
+ * This class is for parsing directory table values from CSV files and adding them to a Record Table object.
  */
 public class CSVParser implements Parser {
 
@@ -29,6 +28,11 @@ public class CSVParser implements Parser {
         this.headers = new ArrayList<>();
     }
 
+    /**
+     * Parses the CSV file and populates the provided RecordTable with records.
+     * 
+     * @param table the RecordTable object to populate with parsed records
+     */
     @Override
     public void parse(RecordTable table) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
