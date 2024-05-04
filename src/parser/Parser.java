@@ -9,7 +9,6 @@ public interface Parser {
     
     /**
      * Parses data and populates the provided RecordTable with records.
-     * 
      * @param table the RecordTable object to populate with records
      */
     void parse(RecordTable table);
